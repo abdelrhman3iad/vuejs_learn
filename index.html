@@ -54,11 +54,21 @@
          <!-- <h2 v-bind:style="`font-size : ${font_size}px`">Hello</h2>
          <input type="text" v-model="font_size"> -->
 
-         <h2>{{age}}</h2>
+         <!-- <h2>{{age}}</h2>
          <h2 v-if="age<20">less than 20</h2>
          <h2 v-else-if="age>20">bigger than 20</h2>
          <h2 v-else="age==20">equal to 20</h2>
-         <button v-on:click="age++">submit</button>
+         <button v-on:click="age++">submit</button> -->
+
+         <div v-for="(student,i) in students" :key="i">
+            <p>
+                {{student.name}}
+            </p>
+            <p>
+                {{student.age}}
+            </p>
+            <br>
+         </div>
     </div>
 </body>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

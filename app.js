@@ -4,13 +4,35 @@ createApp({
     data(){
         return{
             // name:'',
-            age:15,
+            // age:15,
             // link:"http://www.google.com",
             // number:23,
             // numberTwo:1,
             // numberOne:1,
             // classing :''
             // font_size:''
+            students :[
+                {
+                    // id:1,
+                    name:"ahmed",
+                    age:20
+                },
+                {
+                    // id:2,
+                    name:"mostafa",
+                    age:15
+                },
+                {
+                    // id:3,
+                    name:"sayed",
+                    age:32
+                },
+                {
+                    // id:4,
+                    name:"kamal",
+                    age:12
+                },
+            ]
         };
     },
     // methods:{
