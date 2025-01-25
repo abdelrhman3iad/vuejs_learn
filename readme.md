@@ -1,3 +1,5 @@
+Here's the updated README with a new section for `v-for`, explaining its usage and providing examples:
+
 ````markdown
 # Vue.js Quick Reference Guide
 
@@ -95,6 +97,60 @@ Synchronize data between the input and the Vue instance using `v-model`:
 
 ```html
 <input v-model="inputValue" placeholder="Type something" />
+```
+
+---
+
+## 🔁 List Rendering (`v-for`)
+
+Use the `v-for` directive to render a list of items dynamically. It iterates over an array or object.
+
+### Syntax:
+
+```html
+<div v-for="(item, index) in items" :key="index">{{ item }}</div>
+```
+
+### Example:
+
+#### Array of Strings:
+
+```javascript
+data() {
+  return {
+    fruits: ["Apple", "Banana", "Cherry"]
+  };
+}
+```
+
+```html
+<ul>
+  <li v-for="(fruit, index) in fruits" :key="index">
+    {{ index + 1 }}. {{ fruit }}
+  </li>
+</ul>
+```
+
+#### Array of Objects:
+
+```javascript
+data() {
+  return {
+    products: [
+      { id: 1, name: "Laptop", price: 1000 },
+      { id: 2, name: "Phone", price: 500 },
+      { id: 3, name: "Tablet", price: 300 }
+    ]
+  };
+}
+```
+
+```html
+<ul>
+  <li v-for="product in products" :key="product.id">
+    {{ product.name }} - ${{ product.price }}
+  </li>
+</ul>
 ```
 
 ---
