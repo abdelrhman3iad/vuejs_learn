@@ -11,12 +11,11 @@
 </head>
 <body>
     <div  id="app-root">
-        <p>{{age}}</p>
+        <input type="text" ref="myInput">
+        <p>my age is : {{age}}</p>
+        <button @click="getAge">submit</button>
     </div>
     
-    <div id="app-root-2">
-        <button v-on:click="increaseAge">Increase</button>
-    </div>
 
 </body>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

@@ -97,6 +97,64 @@ Synchronize data between the input and the Vue instance using `v-model`:
 
 ---
 
+## 🔁 Using Refs in Vue
+
+Vue's `ref` attribute allows you to access and manipulate DOM elements or child components directly. It's useful for cases where you need fine-grained control over the DOM.
+
+### Example:
+
+#### HTML:
+
+```html
+<div id="app-root">
+  <input type="text" ref="myInput" placeholder="Enter your age" />
+  <p>My age is: {{ age }}</p>
+  <button @click="getAge">Submit</button>
+</div>
+```
+
+#### JavaScript:
+
+```javascript
+const { createApp } = Vue;
+
+createApp({
+  data() {
+    return {
+      age: 20, // Initial value for age
+    };
+  },
+  methods: {
+    getAge() {
+      // Access the input element via its ref and update the age
+      this.age = this.$refs.myInput.value;
+    },
+  },
+}).mount("#app-root");
+```
+
+### Key Points:
+
+1. **Accessing DOM Elements**: Use `this.$refs.<refName>` to access the element.
+2. **Direct Manipulation**: While Vue prefers declarative programming, `refs` provide a way to directly manipulate the DOM if necessary.
+3. **Best Practices**:
+   - Use `refs` sparingly. Whenever possible, rely on Vue's declarative bindings (`v-model`, `v-bind`, etc.).
+   - Avoid complex logic with `refs`. They are meant for simple DOM access or manipulation.
+
+### Example Scenario:
+
+You might use `refs` to focus an input field:
+
+```javascript
+methods: {
+  focusInput() {
+    this.$refs.myInput.focus(); // Set focus on the input element
+  },
+}
+```
+
+---
+
 ## 🔁 Creating Multiple Vue Instances
 
 Vue allows you to create multiple instances of the framework on a single page. This can be useful for modularizing your app or when you want specific components to behave independently.
@@ -148,8 +206,6 @@ const appRoot2 = createApp({
 3. **Best Practices**:
    - Use shared state management solutions like Vuex or Pinia for complex interactions instead of relying on multiple instance variables.
    - Ensure instance IDs (`#app-root`, `#app-root-2`) are unique.
-
-This approach allows for modular design while still enabling limited interaction between components as needed.
 
 ---
 

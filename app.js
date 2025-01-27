@@ -6,16 +6,9 @@ const app_root1 = createApp({
             age : 20,
         }
     },
-    
-}).mount('#app-root');
-
-const app_root2 = createApp({
-    data(){
-
-    },
     methods:{
-        increaseAge(){
-            app_root1.age++;
+        getAge(){
+            this.age = this.$refs.myInput.value;
         }
     }
-}).mount("#app-root-2");
+}).mount('#app-root');
