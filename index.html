@@ -74,7 +74,11 @@
             <img v-bind:src="product.image" alt="" srcset="">
             <h3>{{product.name}}</h3>
             <p>{{product.description}}</p>
-            <span>price = {{product.price}}</span>
+            <p>{{product.category}}</p>
+            <div class="colors">
+            <span  v-for="color in product.colors" v-bind:style="`background: ${color};`"></span>
+            </div>
+            <p>price = {{product.price}}</p>
          </div>
         </div>
     </div>

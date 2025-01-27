@@ -1,4 +1,4 @@
-Here's the updated README with a new section for `v-for`, explaining its usage and providing examples:
+Here's your updated README with a new section on **nested loops (`v-for`)**, including explanations and examples:
 
 ````markdown
 # Vue.js Quick Reference Guide
@@ -155,6 +155,90 @@ data() {
 
 ---
 
+## 🔁 Nested Loops (`v-for` with nested data)
+
+You can use `v-for` inside another `v-for` to loop over nested arrays or objects. Each loop iterates through its respective data.
+
+### Example:
+
+#### Nested Arrays:
+
+```javascript
+data() {
+  return {
+    categories: [
+      {
+        name: "Electronics",
+        items: ["Laptop", "Phone", "Tablet"],
+      },
+      {
+        name: "Clothing",
+        items: ["Shirt", "Pants", "Jacket"],
+      },
+    ],
+  };
+}
+```
+
+```html
+<div v-for="(category, index) in categories" :key="index">
+  <h3>{{ category.name }}</h3>
+  <ul>
+    <li v-for="(item, i) in category.items" :key="i">{{ item }}</li>
+  </ul>
+</div>
+```
+
+#### Nested Objects:
+
+```javascript
+data() {
+  return {
+    products: [
+      {
+        id: 1,
+        name: "Laptop",
+        description: "High-performance laptop",
+        colors: ["red", "blue", "green"],
+        price: 1000,
+      },
+      {
+        id: 2,
+        name: "Phone",
+        description: "Latest smartphone",
+        colors: ["black", "white"],
+        price: 800,
+      },
+    ],
+  };
+}
+```
+
+```html
+<div class="container">
+  <div v-for="product in products" :key="product.id" class="card">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+    <div class="colors">
+      <span
+        v-for="(color, index) in product.colors"
+        :key="index"
+        :style="{ backgroundColor: color }"
+        class="color-box"
+      ></span>
+    </div>
+    <p>Price: ${{ product.price }}</p>
+  </div>
+</div>
+```
+
+### Notes:
+
+- Always use the `:key` attribute to improve rendering performance.
+- Use nested loops responsibly to avoid performance issues with large datasets.
+
+---
+
 ## ✨ Methods & Computed Properties
 
 ### Methods (Manually Triggered)
@@ -198,6 +282,8 @@ computed: {
 ```
 
 ---
+
+Feel free to extend this guide with more examples as you learn!
 
 ```
 

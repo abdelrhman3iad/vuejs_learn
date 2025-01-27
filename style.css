@@ -7,11 +7,27 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    text-align: center;
 }
 .card{
     width: 20%;
     margin: 1px;
+    margin-bottom: 20px;
 }
 .card img{
     width: 100%;
+}
+.colors{
+    display: flex;
+    justify-content: space-around;
+    margin: 5px;
+    align-items: center;
+    /* margin-bottom: 5px; */
+}
+
+.colors span{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid;
 }
