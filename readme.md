@@ -69,6 +69,132 @@ v-bind:(attribute)
 
 ---
 
+## 🔄 Two-Way Binding
+
+Synchronize data between the input and the Vue instance using `v-model`:
+
+```html
+<input v-model="inputValue" placeholder="Type something" />
+```
+
+---
+
+## 🔁 Creating Components
+
+Vue components allow you to create reusable blocks of functionality.
+
+### Example:
+
+#### HTML:
+
+```html
+<div id="app-root">
+  <my_component></my_component>
+</div>
+```
+
+#### JavaScript:
+
+```javascript
+const { createApp } = Vue;
+
+const my_component = {
+  template: `
+    <h2>I am {{ age }} years old</h2>
+    <button @click="changeAge">Increase Age</button>
+  `,
+  data() {
+    return {
+      age: 22, // Local state for the component
+    };
+  },
+  methods: {
+    changeAge() {
+      this.age++;
+    },
+  },
+};
+
+createApp({
+  components: {
+    my_component,
+  },
+}).mount("#app-root");
+```
+
+### Key Points:
+
+1. **Components Are Reusable**: Define a component once and reuse it anywhere in your app.
+2. **Encapsulation**: Components have their own data and methods, isolated from the parent instance.
+
+---
+
+## 🔁 Sharing Data Across Multiple Instances
+
+Vue components and instances are isolated by default, but you can share data between them using a shared JavaScript object. This allows for synchronization of state across components or instances.
+
+### Example:
+
+#### HTML:
+
+```html
+<div id="app-root">
+  <my_component></my_component>
+</div>
+
+<div id="app-root2">
+  <my_component></my_component>
+</div>
+```
+
+#### JavaScript:
+
+```javascript
+const { createApp } = Vue;
+
+// Shared data object
+const data = {
+  age: 22, // Shared state
+};
+
+// Component definition
+const my_component = {
+  template: `
+    <h2>I am {{ age }} years old</h2>
+    <button @click="changeAge">Increase Age</button>
+  `,
+  data() {
+    return data; // Bind the component's data to the shared object
+  },
+  methods: {
+    changeAge() {
+      this.age++;
+    },
+  },
+};
+
+// First Vue instance
+const app_root1 = createApp({
+  components: {
+    my_component,
+  },
+}).mount("#app-root");
+
+// Second Vue instance
+const app_root2 = createApp({
+  components: {
+    my_component,
+  },
+}).mount("#app-root2");
+```
+
+### Key Points:
+
+1. **Shared Data**: Both instances (`app_root1` and `app_root2`) and all components (`my_component`) use the same `data` object. Updating `age` in one place reflects everywhere.
+2. **Avoid Overusing**: Sharing data directly between instances is simple but can lead to tight coupling. Use this for simple cases or prototyping. For larger apps, consider a state management library like **Pinia** or **Vuex**.
+
+---
+
 ## 🛠️ Event Modifiers
 
 Modify event behavior with these modifiers:
@@ -84,128 +210,6 @@ Modify event behavior with these modifiers:
   <button type="submit">Submit</button>
 </form>
 ```
-
----
-
-## 🔄 Two-Way Binding
-
-Synchronize data between the input and the Vue instance using `v-model`:
-
-```html
-<input v-model="inputValue" placeholder="Type something" />
-```
-
----
-
-## 🔁 Using Refs in Vue
-
-Vue's `ref` attribute allows you to access and manipulate DOM elements or child components directly. It's useful for cases where you need fine-grained control over the DOM.
-
-### Example:
-
-#### HTML:
-
-```html
-<div id="app-root">
-  <input type="text" ref="myInput" placeholder="Enter your age" />
-  <p>My age is: {{ age }}</p>
-  <button @click="getAge">Submit</button>
-</div>
-```
-
-#### JavaScript:
-
-```javascript
-const { createApp } = Vue;
-
-createApp({
-  data() {
-    return {
-      age: 20, // Initial value for age
-    };
-  },
-  methods: {
-    getAge() {
-      // Access the input element via its ref and update the age
-      this.age = this.$refs.myInput.value;
-    },
-  },
-}).mount("#app-root");
-```
-
-### Key Points:
-
-1. **Accessing DOM Elements**: Use `this.$refs.<refName>` to access the element.
-2. **Direct Manipulation**: While Vue prefers declarative programming, `refs` provide a way to directly manipulate the DOM if necessary.
-3. **Best Practices**:
-   - Use `refs` sparingly. Whenever possible, rely on Vue's declarative bindings (`v-model`, `v-bind`, etc.).
-   - Avoid complex logic with `refs`. They are meant for simple DOM access or manipulation.
-
-### Example Scenario:
-
-You might use `refs` to focus an input field:
-
-```javascript
-methods: {
-  focusInput() {
-    this.$refs.myInput.focus(); // Set focus on the input element
-  },
-}
-```
-
----
-
-## 🔁 Creating Multiple Vue Instances
-
-Vue allows you to create multiple instances of the framework on a single page. This can be useful for modularizing your app or when you want specific components to behave independently.
-
-### Example:
-
-#### Setting Up Two Instances:
-
-```html
-<div id="app-root">
-  <p>{{ age }}</p>
-</div>
-
-<div id="app-root-2">
-  <button @click="increaseAge">Increase</button>
-</div>
-```
-
-#### JavaScript:
-
-```javascript
-const { createApp } = Vue;
-
-// First instance
-const appRoot1 = createApp({
-  data() {
-    return {
-      age: 20,
-    };
-  },
-}).mount("#app-root");
-
-// Second instance
-const appRoot2 = createApp({
-  methods: {
-    increaseAge() {
-      appRoot1.age++; // Access and modify data in the first instance
-    },
-  },
-}).mount("#app-root-2");
-```
-
-### Key Points:
-
-1. **Data Sharing**: While instances are isolated by default, you can access one instance's data or methods within another by referencing the instance variable (e.g., `appRoot1.age`).
-2. **Scenarios for Multiple Instances**:
-   - When you want to keep different parts of the app independent.
-   - When integrating Vue with non-Vue code (e.g., a legacy project).
-3. **Best Practices**:
-   - Use shared state management solutions like Vuex or Pinia for complex interactions instead of relying on multiple instance variables.
-   - Ensure instance IDs (`#app-root`, `#app-root-2`) are unique.
 
 ---
 

@@ -10,14 +10,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div  id="app-root">
+    <!-- <div  id="app-root">
+        <my_component></my_component>
         <input type="text" ref="myInput">
         <p>my age is : {{age}}</p>
-        <button @click="getAge">submit</button>
-    </div>
+        <button @click="getAge">submit</button> -->
+    <!-- </div> -->
     
+    <!-- <div id="app-root2"> -->
+        <!-- <my_component></my_component> -->
 
+    <!-- </div> -->
+
+    <div id="app-root3">
+        <input type="text" ref="idInput">
+        <button @click="fetchCompany">submit</button>
+        <div v-for="(comp,i) in company" :key="i">
+            <p>name : {{comp.company_name}}</p>
+            <p>description : {{comp.description}}</p>
+            <p>phone_number : {{comp.phone_number}}</p>
+            <p>country : {{comp.country}}</p>
+            <p>address : {{comp.address}}</p>
+             <!-- <p >
+                address street : {{comp.address.street}}
+            </p>
+                <p>
+                address suite : {{comp.address.suite}}
+            </p>
+            <p>
+                address city : {{comp.address.city}}
+            </p>
+            <p>
+                address zipcode : {{comp.address.zipcode}}
+            </p> -->
+                <hr>
+        </div>
+    </div>
 </body>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="app.js"></script>
 </html>
